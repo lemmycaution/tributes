@@ -1,5 +1,5 @@
 ##
-# This module provides a functionalty like native ruby attr_accessor method.
+# This module provides a functionality like native ruby attr_accessor method.
 # Created as a response to https://gist.github.com/burlesona/4f5f2a00a731af547e5b.
 
 require 'json'

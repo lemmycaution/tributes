@@ -1,0 +1,33 @@
+# Tributes
+A module which provides a functionality like native ruby `attr_accessor` method with additional JSON serialisation and dynamic attributes support.
+
+# Usage
+Simply include module in your class and use it like `ActiveModel::Model`
+
+Example:
+
+```
+require './lib/tributes'
+class Person
+  include Tributes
+  tributes :name, :age
+end
+# => [:name, :age]
+person = Person.new(name: 'Bob')
+# => #<Person:0x007fb588a7d880 @_attributes={:name=>"Bob"}>
+person.name
+# => "Bob
+person.age = 12
+# => 12
+
+dynamic_person = Person.new(title: 'Ms', first_name: 'Jane', last_name: 'Cook')
+# => #<Person:0x007fb589405948 @_attributes={:title=>"Ms", :first_name=>"Jane", :last_name=>"Cook"}>
+dynamic_person.title
+# => "Ms"
+puts dynamic_person.to_json
+# => "{\"title\":\"Ms\",\"first_name\":\"Jane\",\"last_name\":\"Cook\"}" 
+```
+
+
+# Tests
+You need to have minitest gem to run tests, to run tests simply execute `bundle install` then `bundle exec ruby test/test_tributes.rb`
