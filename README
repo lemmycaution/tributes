@@ -1,13 +1,13 @@
 # Tributes
-A module which provides a functionality like native ruby `attr_accessor` method with additional JSON serialisation and dynamic attributes support.
+A gem which provides a functionality like native ruby `attr_accessor` method with additional JSON serialisation, dynamic attributes support and primitive validations.
 
 # Usage
-Simply include module in your class and use it like `ActiveModel::Model`
+put `gem 'tributes'` in your Gemfile
 
 Example:
 
 ```
-require './lib/tributes'
+require 'tributes'
 class Person
   include Tributes
   tributes :name, :age
@@ -28,6 +28,24 @@ puts dynamic_person.to_json
 # => "{\"title\":\"Ms\",\"first_name\":\"Jane\",\"last_name\":\"Cook\"}" 
 ```
 
+# Validations
+
+```
+require 'tributes'
+require 'tributes/validations'
+class Person
+  include Tributes
+  include Tributes::Validations
+  tributes :name, :age
+  validates :name, required: true, type: String
+  validates :age, type: Numeric
+end
+person = Person.new(age: 'hello')
+person.valid?
+# => false
+person.errors
+# => [{:name=>:required}, {:age=>:numeric}]
+```
 
 # Tests
-You need to have minitest gem to run tests, to run tests simply execute `bundle install` then `bundle exec ruby test/test_tributes.rb`
+You need to have minitest gem to run tests, to run tests simply execute `bundle install` then `bundle exec rake test`
