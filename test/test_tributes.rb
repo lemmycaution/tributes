@@ -1,5 +1,4 @@
-require "./lib/tributes"
-require "minitest/autorun"
+require "minitest_helper"
 
 class TestTributes < Minitest::Test
 
