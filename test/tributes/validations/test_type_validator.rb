@@ -19,6 +19,14 @@ module Tributes
         @person.last_login = Time.now
       end
 
+      def test_options
+        assert_raises(ArgumentError) { TypeValidator.new }
+      end
+
+      def test_nil
+        assert @string_validator.valid? @person, :last_name
+      end
+
       def test_string_valid?
         assert @string_validator.valid? @person, :first_name
         refute @string_validator.valid? @person, :age

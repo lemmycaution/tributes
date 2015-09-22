@@ -16,6 +16,9 @@ module Tributes
 
         assert validator.valid? person, :name
         refute validator.valid? person, :age
+        
+        person.name = ''
+        refute validator.valid? person, :name
       end
 
     end

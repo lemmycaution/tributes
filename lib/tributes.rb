@@ -23,9 +23,9 @@ module Tributes
     # => 'Bob'
     
     def tributes *attrs
-      attrs.each { |attr| 
-        define_method(:"#{attr}=") { |val| _attributes[attr] = val }
-        define_method(attr) { _attributes[attr] }
+      attrs.each { |attr_name| 
+        define_method(:"#{attr_name}=") { |val| _attributes[attr_name] = val }
+        define_method(attr_name) { _attributes[attr_name] }
       }
     end
 

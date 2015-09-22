@@ -9,9 +9,14 @@ module Tributes
         super options
       end
 
-      def valid? record, attr
-        value = record.public_send(attr)
-        value.is_a?(options)
+      def valid? record, attr_name
+        raise ArgumentError, "Attribute `#{attr_name}` not found" unless record.respond_to? attr_name
+        value = record.public_send(attr_name)
+        value.nil? || value.is_a?(options)
+      end
+
+      def kind
+        options.name.downcase.to_sym
       end
 
     end
